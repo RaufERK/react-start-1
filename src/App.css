@@ -16,7 +16,7 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  font-size: ;
+  font-size: 20px;
   color: white;
 }
 
@@ -29,9 +29,6 @@
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-}
-
-.App-header {
 }
 
 .App-link {

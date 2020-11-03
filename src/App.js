@@ -2,9 +2,11 @@ import './App.css';
 import './components/carStyle.css'
 import Car from './components/Car'
 import NewCar from './components/newCar'
+import { useState } from 'react';
 
 function App() {
-  const myСars = [
+  const [title, setTitle] = useState('Car sell market')
+  const [myСars, setMyCars] = useState([
     {
       name: 'Honda',
       year: 2020,
@@ -20,16 +22,28 @@ function App() {
       year: 2020,
       color: 'Black',
     },
-  ]
-  const carCompList = myСars.map(({ name, year, color }) =>
-    <Car name={name} year={year} color={color} />)
+  ])
+  const [showCarsFlag, setShowCarsFlag] = useState(true)
+  const carCompList = myСars.map(({ name, year, color }, index) =>
+    <Car key={index} name={name} year={index} color={color} setTitle={setTitle} />)
+  const clickFromButtonHandel = () => {
+    setMyCars(prev => [...prev, {
+      name: title,
+      year: 2020,
+      color: 'Black'
+    }])
+    setTitle('');
+  }
   return (
     <div className="App">
-      <h1>Car sell market</h1>
+      <h1>{title}</h1>
+      <input type='text' placeholder='enter text' onChange={(e) => setTitle(e.target.value)} value={title}></input>
+      <button onClick={clickFromButtonHandel}>TITILE</button>
+      <button onClick={() => setShowCarsFlag(prev => !prev)}>SHOW OR NOT</button>
       <div className='carContainer'>
-        {carCompList}
-        <NewCar />
+        {showCarsFlag && carCompList}
       </div>
+      <NewCar changeMyTitile={setTitle} />
     </div>
   );
 }
