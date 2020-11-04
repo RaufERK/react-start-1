@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import "./carStyle.css";
 
 class newCAr extends Component {
   constructor({ changeMyTitile }) {
@@ -9,29 +8,40 @@ class newCAr extends Component {
   index = 0;
   state = {
     cars: [
-      { name: "Ford", year: 1978 },
-      { name: "Yamaha", year: 2000 },
-      { name: "Mazda", year: 1988 },
+      { index: 1, name: "Ford", year: 1978 },
+      { index: 2, name: "Yamaha", year: 2000 },
+      { index: 3, name: "Mazda", year: 1988 },
     ],
     pageTitle: "New Cars Component Titile!!!!",
     showCarsFlag: true,
+    // index: 0,
   };
-  clickHandler = () => {
+  addCar = () => {
     const oldCar = this.state.cars;
+    const newIndex = this.state.cars.length + 1;
     const newCar = [
       ...oldCar,
-      { name: "Volga", year: Math.round(1990 + Math.random() * 30) },
+      {
+        index: newIndex,
+        name: "Volga",
+        year: Math.round(1990 + Math.random() * 30),
+      },
     ];
     this.setState({
-      pageTitle: Math.random(),
       cars: newCar,
     });
   };
+  deleteElemet(indexFromClick) {
+    this.setState({
+      cars: this.state.cars.filter(({ index }) => index !== indexFromClick),
+    });
+  }
   render() {
-    const carsLIst = this.state.cars.map(({ name, year }, index) => (
+    const carsLIst = this.state.cars.map(({ index, name, year }, mapIndex) => (
       <div className="carClass" key={index}>
-        name : {name} | year: {year}
+        {index} | name : {name} | year: {year}
         <button onClick={() => this.state.pageTitle(name + year)}>UP</button>
+        <button onClick={() => this.deleteElemet(index)}>DEL</button>
       </div>
     ));
     return (
@@ -44,10 +54,10 @@ class newCAr extends Component {
           SHOW OR NOT
         </button>
         <h1 style={{ color: "black" }}>{this.state.pageTitle}</h1>
-        {this.state.showCarsFlag && carsLIst}
-        <button onClick={this.clickHandler}>CLICK FOR FUN!!</button>
+        {this.state.showCarsFlag ? carsLIst : null}
+        <button onClick={this.addCar}>ADD CAR</button>
         <button onClick={() => this.state.pageTitle(this.index++)}>
-          CHANGE TITILE!
+          TITILE
         </button>
       </div>
     );
