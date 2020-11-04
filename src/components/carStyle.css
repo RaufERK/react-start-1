@@ -4,6 +4,7 @@
   margin: 3px;
   padding: 3px;
   color: white;
+  box-shadow: 3px 3px 5px 5px rgba(0, 0, 0, 0.25);
 }
 
 .carNewContainer {
@@ -12,4 +13,24 @@
   border: 13px solid lightslategrey;
   border-radius: 15px;
   background-color: lightskyblue;
+}
+
+.input {
+}
+
+.input:focus {
+  outline: none;
+}
+
+.input.green {
+  border: 5px solid green;
+}
+
+.input.red {
+  border: 5px solid red;
+}
+
+.input.bold {
+  border: 10px solid blue;
+  font-weight: bold;
 }
